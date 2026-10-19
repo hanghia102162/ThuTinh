@@ -1,0 +1,922 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Gửi Một Người Đặc Biệt — 20/10</title>
+
+    <!-- Google Fonts: Cormorant Garamond, Playfair Display, Plus Jakarta Sans, Alex Brush -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600;1,700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              linen: "#FFF0F3",
+              parchment: "#FFF9FA",
+              "parchment-deep": "#FDE2E8",
+              "envelope-body": "#FDE8ED",
+              "envelope-dark": "#F9D2DB",
+              "warm-ink": "#3A1E26",
+              "soft-ink": "#6F434E",
+              "dusty-rose": "#D6657E",
+              "rose-subtle": "#FCE4EC",
+              "rose-glow": "#BF435F",
+              "gold-accent": "#E29DAA",
+              "wax-red": "#A82A45",
+              "wax-shadow": "#731427",
+            },
+            fontFamily: {
+              serif: ['"Cormorant Garamond"', "serif"],
+              display: ['"Playfair Display"', "serif"],
+              sans: ['"Plus Jakarta Sans"', "sans-serif"],
+              script: ['"Alex Brush"', "cursive"],
+            },
+            boxShadow: {
+              "soft-vintage":
+                "0 15px 35px -5px rgba(168, 42, 69, 0.12), 0 5px 15px rgba(168, 42, 69, 0.05)",
+              paper:
+                "0 20px 45px -10px rgba(115, 20, 39, 0.12), 0 2px 6px rgba(0, 0, 0, 0.03)",
+              wax: "0 8px 18px rgba(115, 20, 39, 0.38), inset 0 2px 3px rgba(255, 255, 255, 0.35)",
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      /* Paper texture & background subtleties */
+      body {
+        background-color: #fdf0f3;
+        background-image:
+          radial-gradient(
+            circle at 12% 18%,
+            rgba(248, 187, 208, 0.5) 0%,
+            transparent 45%
+          ),
+          radial-gradient(
+            circle at 88% 82%,
+            rgba(244, 143, 177, 0.36) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 50% 45%,
+            rgba(255, 235, 240, 0.7) 0%,
+            transparent 60%
+          );
+        color: #3a1e26;
+        min-height: 100vh;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* Soft grain overlay */
+      .bg-grain {
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+      }
+
+      /* Subtle animation keyframes */
+      @keyframes floatGentle {
+        0%,
+        100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-7px) rotate(1deg);
+        }
+      }
+
+      @keyframes pulseGlow {
+        0%,
+        100% {
+          opacity: 0.4;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.75;
+          transform: scale(1.04);
+        }
+      }
+
+      @keyframes shakeSoft {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        20% {
+          transform: translateX(-6px);
+        }
+        40% {
+          transform: translateX(6px);
+        }
+        60% {
+          transform: translateX(-4px);
+        }
+        80% {
+          transform: translateX(4px);
+        }
+      }
+
+      @keyframes blinkCursor {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+      }
+
+      @keyframes waxPop {
+        0% {
+          transform: scale(1);
+        }
+        40% {
+          transform: scale(1.15) rotate(5deg);
+        }
+        100% {
+          transform: scale(0);
+          opacity: 0;
+        }
+      }
+
+      .animate-float {
+        animation: floatGentle 6s ease-in-out infinite;
+      }
+
+      .animate-glow {
+        animation: pulseGlow 4s ease-in-out infinite;
+      }
+
+      .shake-error {
+        animation: shakeSoft 0.45s ease-in-out;
+      }
+
+      .wax-pop {
+        animation: waxPop 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+
+      .cursor-typing {
+        display: inline-block;
+        width: 2px;
+        height: 1.15em;
+        background-color: #d6657e;
+        margin-left: 2px;
+        vertical-align: -0.15em;
+        animation: blinkCursor 0.9s infinite;
+      }
+
+      /* Custom smooth transition classes */
+      .transition-envelope {
+        transition: all 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+
+      /* Hide scrollbar cleanly while allowing scroll */
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      /* Paper inner border styling */
+      .vintage-frame {
+        box-shadow:
+          inset 0 0 0 1px rgba(214, 101, 126, 0.22),
+          inset 0 0 0 4px rgba(255, 249, 250, 0.9),
+          inset 0 0 0 5px rgba(244, 143, 177, 0.18);
+      }
+    </style>
+  </head>
+
+  <body
+    class="relative flex flex-col justify-between min-h-screen font-sans selection:bg-rose-subtle selection:text-warm-ink"
+  >
+    <!-- Subtle Canvas for Floating Petals / Warm Light Dust -->
+    <canvas
+      id="petalCanvas"
+      class="fixed inset-0 pointer-events-none z-0"
+    ></canvas>
+    <div class="fixed inset-0 bg-grain pointer-events-none z-10"></div>
+
+    <!-- YouTube audio is loaded only after the user presses the music button. -->
+    <div id="youtubeMusicPlayer" class="fixed w-px h-px overflow-hidden" aria-hidden="true"></div>
+
+    <!-- Top Ambient Navigation Bar -->
+    <header
+      class="relative z-20 w-full max-w-5xl mx-auto px-6 py-6 flex items-center justify-between"
+    >
+      <div
+        class="flex items-center space-x-2.5 text-xs sm:text-sm tracking-wider uppercase font-semibold text-soft-ink"
+      >
+        <span
+          class="inline-block w-2.5 h-2.5 rounded-full bg-dusty-rose animate-ping"
+        ></span>
+        <span>20 . 10 — Ngày Phụ Nữ Việt Nam</span>
+      </div>
+
+      <!-- Music Control Button -->
+      <button
+        id="musicToggle"
+        class="group flex items-center gap-2.5 px-4 py-2 rounded-full border border-rose-300/60 bg-white/70 backdrop-blur-md hover:bg-white transition-all text-xs sm:text-sm font-medium text-warm-ink shadow-sm cursor-pointer"
+        title="Bật/Tắt nhạc nền"
+      >
+        <svg
+          id="musicIconPlaying"
+          class="w-4 h-4 text-dusty-rose hidden"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"
+          />
+        </svg>
+        <svg
+          id="musicIconMuted"
+          class="w-4 h-4 text-soft-ink/70"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"
+          />
+        </svg>
+        <span id="musicLabel" class="tracking-wide">Nhạc nền: Tắt</span>
+      </button>
+    </header>
+
+    <!-- MAIN WRAPPER -->
+    <main
+      class="relative z-20 flex-1 flex items-center justify-center px-4 py-8"
+    >
+      <!-- ============================================== -->
+      <!-- SCREEN 1: LOCK SCREEN / THE SEALED ENVELOPE   -->
+      <!-- ============================================== -->
+      <div
+        id="lockScreen"
+        class="w-full max-w-xl transition-envelope duration-700"
+      >
+        <!-- Envelope Container Card -->
+        <div
+          id="envelopeCard"
+          class="relative bg-white/95 backdrop-blur-md rounded-3xl p-8 sm:p-12 shadow-[0_25px_60px_-15px_rgba(168,42,69,0.18)] border-2 border-rose-200/80 transition-transform duration-500 animate-float"
+        >
+          <!-- Subtle Vintage Stamp & Postmark Detail -->
+          <div
+            class="flex justify-between items-start mb-6 border-b border-rose-200/70 pb-5"
+          >
+            <div class="space-y-1.5">
+              <span
+                class="text-xs sm:text-sm tracking-[0.25em] uppercase font-bold text-dusty-rose block font-sans"
+                >BƯU THIẾP ĐẶC BIỆT</span
+              >
+              <p
+                class="font-serif italic text-lg sm:text-xl text-warm-ink font-semibold"
+              >
+                Dành riêng cho một tâm hồn dịu dàng
+              </p>
+            </div>
+
+            <!-- Minimalist Postmark SVG -->
+            <div
+              class="relative w-16 h-16 sm:w-18 sm:h-18 border-2 border-dashed border-dusty-rose/60 rounded-full flex flex-col items-center justify-center rotate-6 select-none bg-rose-50/50 shadow-sm"
+            >
+              <span
+                class="text-xs font-mono tracking-widest text-dusty-rose font-bold"
+                >20.10</span
+              >
+              <span
+                class="text-[9px] tracking-wider uppercase text-soft-ink font-semibold"
+                >Hải Phòng</span
+              >
+            </div>
+          </div>
+
+          <!-- Central Envelope Graphics & Wax Seal -->
+          <div
+            class="relative my-7 py-4 flex flex-col items-center justify-center"
+          >
+            <!-- Decorative envelope back flap lines -->
+            <div
+              class="absolute inset-0 flex items-center justify-center pointer-events-none"
+            >
+              <svg
+                class="w-full h-full text-rose-300/30"
+                viewBox="0 0 300 160"
+                fill="none"
+              >
+                <path
+                  d="M10 10 L150 110 L290 10"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-dasharray="6 4"
+                />
+                <path
+                  d="M10 150 L150 80 L290 150"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                />
+              </svg>
+            </div>
+
+            <!-- Wax Seal Badge (Interactive Accent) -->
+            <div
+              id="waxSeal"
+              role="button"
+              tabindex="0"
+              aria-label="Mở bức thư"
+              class="relative z-10 w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-wax-red shadow-wax flex items-center justify-center cursor-pointer transition-transform duration-300 hover:scale-105 active:scale-95 group"
+            >
+              <!-- Wax edge rim illusion -->
+              <div
+                class="absolute inset-1.5 rounded-full border-2 border-white/30"
+              ></div>
+              <!-- Botanical branch / heart crest -->
+              <svg
+                class="w-10 h-10 sm:w-12 sm:h-12 text-rose-100 transition-transform duration-300 group-hover:rotate-12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                />
+              </svg>
+              <div
+                class="absolute -bottom-2.5 px-3 py-0.5 rounded-full bg-[#E598A7] text-white text-[10px] sm:text-[11px] font-bold tracking-widest uppercase shadow-md"
+              >
+                Niêm phong
+              </div>
+            </div>
+
+            <p
+              class="mt-6 text-sm sm:text-base tracking-wider text-soft-ink font-serif italic font-medium"
+            >
+              "Có một bức thư đang chờ em mở ra..."
+            </p>
+          </div>
+
+          <div class="mt-6 pt-4 text-center">
+            <span
+              class="text-xs sm:text-sm text-soft-ink/70 tracking-wider font-medium"
+            >
+              Chạm vào dấu niêm phong để mở thư
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================== -->
+      <!-- SCREEN 2: THE UNVEILED LETTER & TYPEWRITER     -->
+      <!-- ============================================== -->
+      <div
+        id="letterScreen"
+        class="hidden opacity-0 w-full max-w-3xl transition-all duration-1000 transform translate-y-6"
+      >
+        <!-- Vintage Stationery Paper Card -->
+        <div
+          class="relative bg-white/95 backdrop-blur-md rounded-3xl p-8 sm:p-14 shadow-2xl vintage-frame border-2 border-rose-200/80 overflow-hidden"
+        >
+          <!-- Botanical Corner Illustrations (Minimalist Line Art) -->
+          <div
+            class="absolute top-0 right-0 w-44 h-44 pointer-events-none opacity-25 text-dusty-rose"
+          >
+            <svg
+              viewBox="0 0 120 120"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.2"
+            >
+              <path
+                d="M120 0 C80 20 60 60 70 120 M70 40 C55 35 40 45 45 60 C55 60 65 50 70 40 M90 20 C80 10 65 15 70 30 C80 30 85 25 90 20 M85 75 C70 80 75 95 90 90 C90 80 85 75 85 75"
+              />
+            </svg>
+          </div>
+
+          <div
+            class="absolute bottom-0 left-0 w-44 h-44 pointer-events-none opacity-25 text-dusty-rose transform rotate-180"
+          >
+            <svg
+              viewBox="0 0 120 120"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.2"
+            >
+              <path
+                d="M120 0 C80 20 60 60 70 120 M70 40 C55 35 40 45 45 60 C55 60 65 50 70 40 M90 20 C80 10 65 15 70 30 C80 30 85 25 90 20 M85 75 C70 80 75 95 90 90 C90 80 85 75 85 75"
+              />
+            </svg>
+          </div>
+
+          <!-- Letter Header -->
+          <div
+            class="relative z-10 flex flex-col sm:flex-row justify-between items-start sm:items-center pb-6 border-b border-rose-200/80 gap-3"
+          >
+            <div>
+              <span
+                class="text-xs sm:text-sm font-mono tracking-widest uppercase text-dusty-rose font-bold block"
+              >
+                Hải Phòng • Ngày 20 Tháng 10
+              </span>
+              <h2
+                id="recipientGreeting"
+                class="font-display italic text-3xl sm:text-4xl text-warm-ink font-bold mt-1.5"
+              >
+                Gửi một người đặc biệt,
+              </h2>
+            </div>
+
+            <!-- Action pill: Skip Typewriter / Instant Read -->
+            <button
+              id="skipTypewriterBtn"
+              class="text-xs sm:text-sm font-semibold text-soft-ink hover:text-dusty-rose transition-colors py-1.5 px-3 rounded-lg border border-rose-300/80 bg-rose-50/50 hover:bg-rose-100/60 shadow-sm cursor-pointer"
+            >
+              Xem toàn bộ ▾
+            </button>
+          </div>
+
+          <!-- Letter Body Container with Typewriter -->
+          <div
+            class="relative z-10 mt-8 min-h-[340px] font-serif text-xl sm:text-2xl leading-relaxed text-[#2D131A] font-medium space-y-6"
+          >
+            <div
+              id="typewriterTarget"
+              class="whitespace-pre-line tracking-wide"
+            ></div>
+            <span id="typingCursor" class="cursor-typing"></span>
+          </div>
+
+          <!-- Handwritten Signature Section (fades in after typing completes) -->
+          <div
+            id="signatureSection"
+            class="relative z-10 mt-12 pt-8 border-t border-rose-200/80 flex flex-col sm:flex-row justify-between items-end sm:items-center gap-6 opacity-0 transition-opacity duration-1000"
+          >
+            <div class="space-y-1.5 text-left w-full sm:w-auto">
+              <span
+                class="text-xs sm:text-sm tracking-wider uppercase text-soft-ink font-bold font-sans block"
+                >Lời chúc từ</span
+              >
+              <span
+                id="signatureAuthor"
+                class="font-script text-4xl sm:text-5xl text-dusty-rose block"
+                >Một người bí mật nhé !</span
+              >
+              <span
+                class="text-xs sm:text-sm text-soft-ink font-serif italic font-medium block"
+                >Nguyện chúc em mỗi ngày đều dịu dàng như hoa nở.</span
+              >
+            </div>
+
+            <!-- Bottom Actions -->
+            <div class="flex items-center gap-3 w-full sm:w-auto justify-end">
+              <button
+                id="replayBtn"
+                class="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-warm-ink bg-rose-50/60 hover:bg-white border border-rose-200 transition-all flex items-center gap-2 shadow-sm cursor-pointer"
+              >
+                <svg
+                  class="w-4 h-4 text-dusty-rose"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                  />
+                </svg>
+                <span>Đọc lại bức thư</span>
+              </button>
+
+              <button
+                id="giftHeartBtn"
+                class="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-white bg-dusty-rose hover:bg-rose-glow transition-all flex items-center gap-2 shadow-md cursor-pointer"
+              >
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                  <path
+                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                  />
+                </svg>
+                <span>Gửi trọn bình yên</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Warm Footer quote -->
+        <p
+          class="text-center text-sm sm:text-base text-soft-ink font-serif italic font-medium mt-6"
+        >
+          "Vẻ đẹp sâu lắng nhất luôn đến từ sự chân thành và một tâm hồn an
+          nhiên."
+        </p>
+      </div>
+    </main>
+
+    <!-- Global Footer -->
+    <footer
+      class="relative z-20 py-5 text-center text-xs sm:text-sm text-soft-ink/60 tracking-wider font-mono"
+    >
+      <span>DÀNH TẶNG NGÀY 20.10 • MỘT CHÚT ẤM ÁP GIỮA MÙA THU</span>
+    </footer>
+
+    <!-- Heart Burst Overlay Container -->
+    <div
+      id="heartBurstLayer"
+      class="fixed inset-0 pointer-events-none z-50 overflow-hidden"
+    ></div>
+
+    <!-- ============================================== -->
+    <!-- JAVASCRIPT LOGIC & CONFIGURATION               -->
+    <!-- ============================================== -->
+    <script>
+      /**
+       * =========================================================================
+       * BẢNG THIẾT LẬP NỘI DUNG (CUSTOM CONFIGURATION)
+       * Có thể chỉnh sửa lời chúc và thông tin người nhận tại đây.
+       * =========================================================================
+       */
+      const CONFIG = {
+        // Tên hoặc danh xưng hiển thị trên đầu thư:
+        recipientTitle: "Gửi em,",
+
+        // Tác giả ký tên dưới chân thư:
+        senderSignature: "Một người luôn dõi theo",
+
+        // Nội dung lời chúc sâu lắng, tinh tế, từng đoạn văn cách nhau bằng dấu xuống dòng kép
+        letterParagraphs: [
+          "Giữa thành phố tháng Mười này, khi những cơn gió đầu mùa len lỏi qua từng góc phố và mang theo một nét bình yên rất khẽ, em lại vô thức nghĩ về em.",
+
+          "Thế giới ngoài kia vốn dĩ đã quá vội vã, xô bồ và đôi khi cố gồng mình để chạy theo những chuẩn mực hào nhoáng. Nhưng ở em lại có một khoảng lặng rất riêng, rất trong trẻo – một nội tâm sâu sắc, một tấm lòng ấm áp và sự thấu cảm dịu dàng mà không phải ai cũng giữ được giữa những bộn bề. Em giống như một nốt trầm êm ả, bước đến và làm dịu đi những ồn ào xung quanh.",
+
+          "Ngày 20/10 hôm nay, em không chúc em phải thật rực rỡ hay phải gánh trên vai vỏ bọc của sự hoàn hảo. Em chỉ mong em luôn được là chính mình: tự do đón nhận mọi điều, an yên giữa những thăng trầm, kiên cường vững chãi nhưng cũng luôn được quyền yếu mềm, được nũng nịu với cuộc đời khi mỏi mệt.",
+
+          "Mong rằng quãng đường sắp tới, dù mưa hay nắng, em sẽ luôn có một tách trà ấm trên tay, có những cuốn sách hay để bầu bạn, và có một góc bình yên trọn vẹn để trở về. Mong mỗi ngày trôi qua với em đều là những khoảnh khắc nhẹ nhàng, dung dị nhưng đong đầy niềm vui.",
+
+          "Chúc em – một người đặc biệt – một ngày 20/10 thật ngọt ngào, bình an và trọn vẹn. Như chính nụ cười và sự hiện diện của em trong cuộc đời này.",
+        ],
+
+        // Tốc độ gõ chữ (milliseconds)
+        typeSpeed: 28,
+        commaPause: 160,
+        periodPause: 360,
+        paragraphPause: 450,
+      };
+
+      // -------------------------------------------------------------
+      // Canvas: Floating Minimalist Petals & Warm Ambient Dust
+      // -------------------------------------------------------------
+      const canvas = document.getElementById("petalCanvas");
+      const ctx = canvas.getContext("2d");
+      let width = (canvas.width = window.innerWidth);
+      let height = (canvas.height = window.innerHeight);
+
+      window.addEventListener("resize", () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      });
+
+      const particles = [];
+      const PARTICLE_COUNT = 24;
+
+      class Particle {
+        constructor() {
+          this.reset(true);
+        }
+        reset(initial = false) {
+          this.x = Math.random() * width;
+          this.y = initial ? Math.random() * height : -20;
+          this.size = Math.random() * 5 + 3;
+          this.speedY = Math.random() * 0.6 + 0.3;
+          this.speedX = (Math.random() - 0.5) * 0.4;
+          this.angle = Math.random() * Math.PI * 2;
+          this.angularSpeed = (Math.random() - 0.5) * 0.015;
+          this.opacity = Math.random() * 0.4 + 0.2;
+          // Soft romantic pink tones: sakura pink, pastel blush, rose petal
+          const colors = [
+            "rgba(244, 143, 177, ", // pastel sakura pink
+            "rgba(248, 187, 208, ", // soft blush pink
+            "rgba(225, 101, 126, ", // rose petal pink
+            "rgba(255, 214, 224, ", // dreamy light pink
+          ];
+          this.baseColor = colors[Math.floor(Math.random() * colors.length)];
+        }
+        update() {
+          this.y += this.speedY;
+          this.x += Math.sin(this.angle) * 0.4 + this.speedX;
+          this.angle += this.angularSpeed;
+
+          if (this.y > height + 20 || this.x < -30 || this.x > width + 30) {
+            this.reset(false);
+          }
+        }
+        draw() {
+          ctx.save();
+          ctx.translate(this.x, this.y);
+          ctx.rotate(this.angle);
+          ctx.fillStyle = `${this.baseColor}${this.opacity})`;
+
+          // Draw an organic petal / oval shape
+          ctx.beginPath();
+          ctx.ellipse(
+            0,
+            0,
+            this.size * 1.3,
+            this.size * 0.7,
+            0,
+            0,
+            Math.PI * 2,
+          );
+          ctx.fill();
+          ctx.restore();
+        }
+      }
+
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
+        particles.push(new Particle());
+      }
+
+      let animationRunning = true;
+      function renderCanvas() {
+        if (!animationRunning) return;
+        ctx.clearRect(0, 0, width, height);
+        for (const p of particles) {
+          p.update();
+          p.draw();
+        }
+        requestAnimationFrame(renderCanvas);
+      }
+      renderCanvas();
+
+      document.addEventListener("visibilitychange", () => {
+        animationRunning = !document.hidden;
+        if (animationRunning) renderCanvas();
+      });
+
+      // -------------------------------------------------------------
+      // Audio Player Toggle & Sound Effects
+      // -------------------------------------------------------------
+      const youtubeMusicPlayer = document.getElementById("youtubeMusicPlayer");
+      const youtubeVideoId = "tRD8YPTN4JI";
+      const musicToggle = document.getElementById("musicToggle");
+      const musicIconPlaying = document.getElementById("musicIconPlaying");
+      const musicIconMuted = document.getElementById("musicIconMuted");
+      const musicLabel = document.getElementById("musicLabel");
+      let isPlaying = false;
+
+      function toggleMusic(forcePlay = null) {
+        const targetState = forcePlay !== null ? forcePlay : !isPlaying;
+        if (targetState) {
+          if (!youtubeMusicPlayer.querySelector("iframe")) {
+            const player = document.createElement("iframe");
+            player.title = "Nhạc nền YouTube";
+            player.width = "1";
+            player.height = "1";
+            player.allow = "autoplay; encrypted-media";
+            player.referrerPolicy = "strict-origin-when-cross-origin";
+            player.src = `https://www.youtube-nocookie.com/embed/${youtubeVideoId}?autoplay=1&loop=1&playlist=${youtubeVideoId}&playsinline=1`;
+            youtubeMusicPlayer.appendChild(player);
+          }
+          isPlaying = true;
+          musicIconPlaying.classList.remove("hidden");
+          musicIconMuted.classList.add("hidden");
+          musicLabel.textContent = "Giai điệu: Đang phát";
+          musicToggle.classList.add("border-dusty-rose/40", "bg-rose-subtle/30");
+        } else {
+          youtubeMusicPlayer.replaceChildren();
+          isPlaying = false;
+          musicIconPlaying.classList.add("hidden");
+          musicIconMuted.classList.remove("hidden");
+          musicLabel.textContent = "Nhạc nền: Tắt";
+          musicToggle.classList.remove(
+            "border-dusty-rose/40",
+            "bg-rose-subtle/30",
+          );
+        }
+      }
+
+      musicToggle.addEventListener("click", () => toggleMusic());
+
+      // Start the requested track as soon as the page opens.
+      toggleMusic(true);
+
+      // -------------------------------------------------------------
+      // Sealed Envelope
+      // -------------------------------------------------------------
+      const envelopeCard = document.getElementById("envelopeCard");
+      const waxSeal = document.getElementById("waxSeal");
+      const lockScreen = document.getElementById("lockScreen");
+      const letterScreen = document.getElementById("letterScreen");
+      const typewriterTarget = document.getElementById("typewriterTarget");
+      const typingCursor = document.getElementById("typingCursor");
+      const signatureSection = document.getElementById("signatureSection");
+      const recipientGreeting = document.getElementById("recipientGreeting");
+      const skipTypewriterBtn = document.getElementById("skipTypewriterBtn");
+      const replayBtn = document.getElementById("replayBtn");
+      const giftHeartBtn = document.getElementById("giftHeartBtn");
+
+      let isOpening = false;
+
+      function openEnvelope() {
+        if (isOpening) return;
+        isOpening = true;
+        // Wax seal pop animation
+        waxSeal.classList.add("wax-pop");
+
+        // Envelope open & fade out
+        setTimeout(() => {
+          envelopeCard.style.transform = "scale(0.92) translateY(20px)";
+          envelopeCard.style.opacity = "0";
+          lockScreen.style.opacity = "0";
+          lockScreen.style.transform = "translateY(15px)";
+
+          setTimeout(() => {
+            lockScreen.classList.add("hidden");
+            openLetter();
+          }, 600);
+        }, 400);
+      }
+
+      waxSeal.addEventListener("click", openEnvelope);
+      waxSeal.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openEnvelope();
+        }
+      });
+
+      // -------------------------------------------------------------
+      // Letter Unfold & Typewriter Effect
+      // -------------------------------------------------------------
+      let isTyping = false;
+      let typingTimeouts = [];
+
+      function clearTyping() {
+        typingTimeouts.forEach((t) => clearTimeout(t));
+        typingTimeouts = [];
+        isTyping = false;
+      }
+
+      function openLetter() {
+        recipientGreeting.textContent = CONFIG.recipientTitle;
+        const signatureAuthorEl = document.getElementById("signatureAuthor");
+        if (signatureAuthorEl)
+          signatureAuthorEl.textContent = CONFIG.senderSignature;
+        letterScreen.classList.remove("hidden");
+
+        // Smooth fade-in
+        requestAnimationFrame(() => {
+          letterScreen.classList.remove("opacity-0", "translate-y-6");
+          letterScreen.classList.add("opacity-100", "translate-y-0");
+        });
+
+        // Start typewriter after smooth transition
+        setTimeout(() => {
+          startTypewriter();
+        }, 500);
+      }
+
+      function startTypewriter() {
+        clearTyping();
+        typewriterTarget.innerHTML = "";
+        typingCursor.style.display = "inline-block";
+        signatureSection.classList.remove("opacity-100");
+        signatureSection.classList.add("opacity-0");
+        isTyping = true;
+
+        const fullText = CONFIG.letterParagraphs.join("\n\n");
+        let index = 0;
+
+        function typeNextChar() {
+          if (!isTyping) return;
+
+          if (index < fullText.length) {
+            const char = fullText[index];
+            typewriterTarget.textContent += char;
+            index++;
+
+            // Natural cadence: pause on commas, periods, newlines
+            let delay = CONFIG.typeSpeed;
+            if (char === ",") delay = CONFIG.commaPause;
+            else if (char === "." || char === "—" || char === "–")
+              delay = CONFIG.periodPause;
+            else if (char === "\n") delay = CONFIG.paragraphPause;
+
+            // Auto scroll smoothly on mobile screens if text reaches bottom
+            if (char === "\n" || index % 25 === 0) {
+              const cursorRect = typingCursor.getBoundingClientRect();
+              if (cursorRect.bottom > window.innerHeight - 90) {
+                window.scrollBy({ top: 35, behavior: "smooth" });
+              }
+            }
+
+            const t = setTimeout(typeNextChar, delay);
+            typingTimeouts.push(t);
+          } else {
+            // Finished typing!
+            finishTyping();
+          }
+        }
+
+        typeNextChar();
+      }
+
+      function finishTyping() {
+        clearTyping();
+        typewriterTarget.textContent = CONFIG.letterParagraphs.join("\n\n");
+        typingCursor.style.display = "none";
+
+        // Reveal handwritten signature
+        signatureSection.classList.remove("opacity-0");
+        signatureSection.classList.add("opacity-100");
+        setTimeout(() => {
+          signatureSection.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+          });
+        }, 350);
+      }
+
+      // Skip typewriter button
+      skipTypewriterBtn.addEventListener("click", () => {
+        finishTyping();
+      });
+
+      // Replay button
+      replayBtn.addEventListener("click", () => {
+        startTypewriter();
+      });
+
+      // -------------------------------------------------------------
+      // Interactive Heart Burst Celebration
+      // -------------------------------------------------------------
+      giftHeartBtn.addEventListener("click", (e) => {
+        createHeartBurst(e.clientX, e.clientY);
+      });
+
+      function createHeartBurst(originX, originY) {
+        const container = document.getElementById("heartBurstLayer");
+        const heartCount = 18;
+
+        const rect = giftHeartBtn.getBoundingClientRect();
+        const startX = originX || rect.left + rect.width / 2;
+        const startY = originY || rect.top + rect.height / 2;
+
+        for (let i = 0; i < heartCount; i++) {
+          const heart = document.createElement("div");
+          heart.innerHTML = `
+          <svg class="w-5 h-5 text-dusty-rose fill-current drop-shadow-sm" viewBox="0 0 24 24">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        `;
+          heart.style.position = "fixed";
+          heart.style.left = `${startX}px`;
+          heart.style.top = `${startY}px`;
+          heart.style.pointerEvents = "none";
+          heart.style.zIndex = "999";
+
+          const angle = Math.random() * Math.PI * 2;
+          const velocity = Math.random() * 90 + 50;
+          const targetX = Math.cos(angle) * velocity;
+          const targetY = Math.sin(angle) * velocity - 60;
+          const rotate = (Math.random() - 0.5) * 60;
+          const scale = Math.random() * 0.7 + 0.6;
+
+          heart.style.transition = "all 1.2s cubic-bezier(0.1, 0.8, 0.3, 1)";
+          heart.style.opacity = "1";
+          container.appendChild(heart);
+
+          requestAnimationFrame(() => {
+            heart.style.transform = `translate(${targetX}px, ${targetY}px) rotate(${rotate}deg) scale(${scale})`;
+            heart.style.opacity = "0";
+          });
+
+          setTimeout(() => {
+            heart.remove();
+          }, 1300);
+        }
+      }
+    </script>
+  </body>
+</html>
