@@ -243,12 +243,11 @@
       font-size: 16px;
       font-family: inherit;
       font-weight: 600;
-      border: 0;
       display: inline-flex;
       align-items: center;
       gap: 10px;
       box-shadow: 0 0 25px rgba(255, 64, 129, 0.5), 0 0 10px rgba(255, 255, 255, 0.4) inset;
-      cursor: pointer;
+      cursor: default;
       z-index: 15;
       transition: all 0.3s;
       white-space: nowrap;
@@ -608,12 +607,12 @@
   <div class="scene-wrapper">
 
     <!-- Lời mời nhấp vào bông hoa -->
-    <button class="hint-tap-banner" id="growLink" onclick="growGarden(event)">
-      <span>&#127800; Nhan vao day de hoa moc len &#10024;</span>
-    </button>
+    <div class="hint-tap-banner">
+      <span>&#127800; Chạm vào hoa để mở thiệp &#128140;</span>
+    </div>
 
     <!-- VƯỜN HOA NỞ LÊN TỰ ĐỘNG KHI MỞ TRANG (THEO ĐÚNG HÌNH ẢNH MẪU) -->
-    <div class="flower-garden-container" id="flowerGarden" title="Chạm vào bông hoa để mở thư!">
+    <div class="flower-garden-container garden-started" id="flowerGarden" title="Chạm vào bông hoa để mở thư!">
       <svg class="garden-svg" viewBox="0 0 700 700" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <!-- Gradient cánh hoa hồng tươi (vivid magenta/pink) -->
@@ -1160,15 +1159,6 @@
        ======================================================== */
     const modalBackdrop = document.getElementById('modalBackdrop');
     const reopenBtn = document.getElementById('reopenBtn');
-
-    function growGarden(event) {
-      event?.preventDefault();
-      event?.stopPropagation();
-      document.getElementById('flowerGarden').classList.add('garden-started');
-      const link = document.getElementById('growLink');
-      link.innerHTML = '<span>&#127800; Cham vao bong hoa de mo thiep &#128140;</span>';
-      link.onclick = openLetter;
-    }
 
     function openLetter(event) {
       if (event && event.stopPropagation) event.stopPropagation();
